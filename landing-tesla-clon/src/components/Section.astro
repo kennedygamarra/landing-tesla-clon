@@ -1,0 +1,16 @@
+---
+const {title, subtitle, color} = Astro.props;
+const textColor = 'text-' + color;
+---
+<section class="landing-page-color bg-black w-screen h-screen relative overflow-hidden my-[1px]" data-header-color=`${color}`>
+    <div class=`flex flex-col w-full h-full ${textColor} absolute text-center z-10 pt-24`>
+        <h1 class="text-4xl font-medium">{title}</h1>
+        <p class="text-sm font-thin pt-3">{subtitle}</p>
+        <!-- astro slots -->
+        <slot name="buttons"/>
+    </div>
+    <div class="absolute top-0 bottom-0">
+        <slot name="background"/>
+    </div>
+
+</section>

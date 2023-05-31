@@ -1,7 +1,6 @@
 ---
 import MainHeader from "../components/MainHeader.astro";
-import Experience from "../components/Experience.astro";
-import Model3 from "../components/Model3.astro";
+import Section from "../components/Section.astro";
 ---
 <html lang="en">
 	<head>
@@ -15,10 +14,22 @@ import Model3 from "../components/Model3.astro";
 		<MainHeader/>
 		<main class="w-full overflow-auto h-screen snap-y snap-mandatory ">
 			<div class="snap-center">
-				<Experience/>
+				<Section title="Experience Tesla" subtitle="Schedule a Demo Drive Today" color="white">
+					<a  slot="buttons" href="#" class="bottom-0 py-[0.45rem] border-white text-sm border-[3px] w-60 m-auto mb-36 
+					rounded hover:bg-white hover:text-black transition-colors">Demo Drive</a>
+					<video slot="background" class="h-full w-screen object-cover" src="./public/video.webm" loop muted autoplay></video>
+				</Section>
 			</div>
 			<div class="snap-center">
-				<Model3/>
+				<Section title="Model 3" subtitle="Lease from $399/mo" color="black">
+					<div  slot="buttons" class="m-auto mb-36 bottom-0">
+						<a href="#" class="py-[0.65rem] px-20 bg-gray-800 text-white text-sm border-2 w-60 m-auto 
+						rounded border-gray-800 font-medium mr-2">Order Now</a>
+						<a href="#" class="py-[0.65rem] px-20 bg-white text-sm border-2 w-60 m-auto 
+						rounded border-white font-medium text-gray-600 ml-2">Demo Drive</a>
+					</div>
+					<img slot="background" class="h-full w-screen object-cover" src="../public/model3.avif" alt="">
+				</Section>
 			</div>
 		</main>
 	</body>
