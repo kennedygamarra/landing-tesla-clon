@@ -1,0 +1,82 @@
+---
+import LogoTesla from "./LogoTesla.astro";
+
+---
+
+
+<header class="flex py-6 px-10 items-center fixed top-0 w-full justify-between z-20" id="landing-header">
+    <div class="flex">
+        <LogoTesla/>
+    </div>
+    <nav>
+        <ul class="flex [&>li]:p-2 [&>li]:px-3 text-sm [&>li]:rounded-sm [&>li]:cursor-pointer">
+            <li><a href="#"></a>Model S</li>
+            <li><a href="#"></a>Model 3</li>
+            <li><a href="#"></a>Model x</li>
+            <li><a href="#"></a>Model Y</li>
+            <li><a href="#"></a>Solar Roof</li> 
+            <li><a href="#"></a>Solar Panels</li>
+            <li><a href="#"></a>Powerwall</li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="flex [&>li]:p-2 font-medium text-sm [&>li]:rounded-sm [&>li]:cursor-pointer">
+            <li><a href="#"></a>Shop</li>
+            <li><a href="#"></a>Account</li>
+            <li><a href="#"></a>Menu</li>
+        </ul>
+    </nav>
+    <div  class="absolute bg-black/5 backdrop-blur-0 rounded translate-x-[var(--left)] translate-y-[var(--top)]
+            left-0 top-0 w-[var(--width)] h-[var(--height)] ease-in-out transition-all -z-10" id="menu-backdrop"/>
+</header>
+
+
+<script>
+
+    const listItem = document.querySelectorAll("#landing-header li");
+    const menuBackdrop = document.querySelector("#menu-backdrop") as HTMLElement;
+    
+    listItem.forEach((item) => {
+        item.addEventListener("mouseenter",() => {
+            const {left,top, width,height } = item.getBoundingClientRect();
+            menuBackdrop.style.setProperty("--left",`${left}px`);
+            menuBackdrop.style.setProperty("--top",`${top}px`);
+            menuBackdrop.style.setProperty("--width",`${width}px`);
+            menuBackdrop.style.setProperty("--height",`${height}px`);
+            menuBackdrop.style.opacity = "1";
+            menuBackdrop.style.visibility = "visible";
+        });
+        item.addEventListener("mouseleave",() => {
+             menuBackdrop.style.opacity = "0";
+             menuBackdrop.style.visibility = "hidden";
+        });
+    });
+
+</script>
+
+
+<script>
+	//recuperar un elemento por interception observer
+	const headerElement = document.querySelector("#landing-header") as HTMLElement;
+
+	const options = {
+		root: null, //null es el viewport
+		rootMargin: "0px", //margen del viewport
+		threshold: 0.9 //porcentaje de visibilidad del elemento
+	};
+
+	//crear una instancia de intersection observer
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				const color = entry.target.getAttribute("data-header-color");
+                //asignar un color al elemento
+                headerElement.style.color = color;
+			} 
+		},options);
+	});
+
+    const sectionElements = document.querySelectorAll(".landing-page-color");
+    sectionElements.forEach(element =>  observer.observe(element));
+
+</script>
